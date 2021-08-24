@@ -19,15 +19,17 @@ And input string is valid if:
 
 **Example 3**
 
-> Input: s = "{\[}]"
+> Input: s = "{\[}]"  
 > output: false
 
 **Example 4**
 
-> Input: s = "{\[]}"
+> Input: s = "{\[]}"  
 > output: true
 
-
+Constraints:  
+- `1 <= s.length <= $10^4$`
+-  `s` consists of parentheses only `()[]{}` 
 
 
 
