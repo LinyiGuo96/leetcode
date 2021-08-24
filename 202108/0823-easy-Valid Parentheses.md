@@ -60,7 +60,7 @@ class Solution:
 
 This method is called `stack` method, which is widely used in Java.
 
-Here is a [introduction](https://www.liaoxuefeng.com/wiki/1252599548343744/1265121668997888) to `stack` method, but written in chinese.
+Here is a [introduction](https://www.liaoxuefeng.com/wiki/1252599548343744/1265121668997888) to `stack` method, but written in chinese. Just remember the `LIFO` (last in first out) principle.
 
 
 
