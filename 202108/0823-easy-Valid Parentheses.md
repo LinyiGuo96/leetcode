@@ -9,13 +9,24 @@ And input string is valid if:
 
 **Example 1**
 
-> Input: s = "{}"
+> Input: s = "{}"  
 > output: true
 
 **Example 2**
 
-> Input: s = "(){}\[]"
+> Input: s = "(){}\[]"  
 > output: true
+
+**Example 3**
+
+> Input: s = "{\[}]"
+> output: false
+
+**Example 4**
+
+> Input: s = "{\[]}"
+> output: true
+
 
 
 
