@@ -25,11 +25,11 @@ Merge two sorted linked lists and return it as a sorted list. The list should be
 - `-100 <= Node.val <= 100`
 - Both `l1` and `l2` are sorted in **non-decreasing** order
 
-**Solution**
+**Solutions**
 
 ```python
 class Solution:
-    def mergeTwoLists(self, l1, l2):
+    def mergeTwoLists(self, l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
         
 ```
 
