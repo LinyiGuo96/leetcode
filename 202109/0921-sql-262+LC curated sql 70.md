@@ -271,7 +271,7 @@ where s.name not in (
 ```
 
 
-**608. Tree Node**
+**608. Tree Node (medium)**
 
 ![image](https://user-images.githubusercontent.com/51500878/134243785-0b5fbe8c-fff7-43a6-aacb-7395fc5eb4ce.png)
 
@@ -282,5 +282,70 @@ where s.name not in (
 **Solution**
 
 ```sql
-
+# My method
+select distinct t.id as Id, case
+                when p.id is NULL then "Root"
+                when c.id is NULL then "Leaf"
+                else "Inner"
+                end as Type
+from tree t
+left join tree p
+on t.p_id = p.id
+left join tree c
+on t.id = c.p_id;
 ```
+
+```sql
+# Similar method but simple
+SELECT DISTINCT t1.id, (
+    CASE
+    WHEN t1.p_id IS NULL  THEN 'Root'
+    WHEN t1.p_id IS NOT NULL AND t2.id IS NOT NULL THEN 'Inner'
+    WHEN t1.p_id IS NOT NULL AND t2.id IS NULL THEN 'Leaf'
+    END
+) AS Type 
+FROM tree t1
+LEFT JOIN tree t2
+ON t1.id = t2.p_id
+```
+
+**Note**
+
+- `case when ... then ... end as VarName`
+
+
+**610. Triangle Judgement**
+
+![image](https://user-images.githubusercontent.com/51500878/134247528-45d4a629-9210-44e5-8836-142bdc2f3dbf.png)
+
+**Solution**
+
+```sql
+# actually alias `t` could be ignored
+select t.*, case 
+                when t.x + t.y <= t.z or t.x + t.z <= t.y or t.y + t.z <= t.x then "No"
+                else "Yes"
+                end as triangle
+from triangle t 
+```
+
+
+**613. Shortest Distance in a Line**
+
+![image](https://user-images.githubusercontent.com/51500878/134250220-5a17ef06-e3bc-4cd9-abf1-d396519896e7.png)
+
+**Solution**
+
+```sql
+select min(abs(a.x - b.x)) as shortest
+from point a, point b
+where a.x != b.x
+```
+
+
+**615. Average Salary: Departments VS Company**
+
+![image](https://user-images.githubusercontent.com/51500878/134250647-52da3c1c-d0a7-40d2-98ca-1ecfb1c96d49.png)
+
+![image](https://user-images.githubusercontent.com/51500878/134250665-c5118a8b-a9bb-4ae7-8a78-bd4c5bdea0d1.png)
+
