@@ -173,5 +173,114 @@ where n.frequency >= abs((select sum(frequency) from numbers where number <= n.n
 **Solution**
 
 ```sql
+# my method
+select c.*
+from (select a.dept_name, count(b.student_id) as student_number
+from department a
+left join student b
+on a.dept_id = b.dept_id
+group by a.dept_name) c
+order by c.student_number desc, c.dept_name
+
+# imporved version
+select a.dept_name, count(b.student_id) as student_number
+from department a
+left join student b
+on a.dept_id = b.dept_id
+group by a.dept_name
+order by student_number desc, a.dept_name
+```
+
+**Note**
+
+- Great! This is the first problem I solved by myself today! Cheers! (Although it's quite tedious...)
+- The improved version shows that we could use derived variable in `order` clause (**important**)
+
+
+**586. Customer Placing the Largest Number of Orders**
+
+![image](https://user-images.githubusercontent.com/51500878/134239417-8493d6e3-c17f-4ecd-8a5e-5b452f8add4c.png)
+
+![image](https://user-images.githubusercontent.com/51500878/134239453-c37cc9db-1db2-41fe-af0a-65a13ccc16dc.png)
+
+
+**Solution**
+
+```sql
+select customer_number 
+from orders
+group by customer_number
+order by count(*) desc
+limit 1;
+```
+
+```sql
+# For the follow-up question
+select customer_number
+from orders 
+group by customer_number
+having count(order_number) = (
+        select count(order_number) as cnt
+        from orders
+        group by customer_number
+        order by cnt desc
+        limit 1
+)
+```
+
+**Note**
+
+- In the last problem, we noticed that the derived variable could be used in the `order` clause. Similarly, `order by count(*) desc`, `order` clause could also be used with  some function expressions.
+- For this type of question, if we need to extract the first or some specific `ith` item(s), use `limit x offset y` clause! 
+
+**603. Consecutive Available Seats**
+
+![image](https://user-images.githubusercontent.com/51500878/134240778-7800bfb0-f6dc-4888-abf3-4eaf0012b9d5.png)
+
+**Solution**
+
+```sql
+select distinct a.seat_id
+from cinema a, cinema b
+where abs(a.seat_id - b.seat_id) = 1 and a.free = 1 and b.free=1
+order by a.seat_id
+```
+
+
+**607. Sales Person**
+
+![image](https://user-images.githubusercontent.com/51500878/134242550-c0e42463-cb8e-4b5a-8bf8-370cb1c4598e.png)
+
+![image](https://user-images.githubusercontent.com/51500878/134242591-02e7f566-fac9-445c-8db9-659be796b658.png)
+
+
+**Solution**
+
+```sql
+select s.name
+from salesperson s
+where s.name not in (
+    select s1.name
+    from orders o
+    left join company c
+    on o.com_id = c.com_id
+    left join salesperson s1
+    on o.sales_id = s1.sales_id
+    where c.name = 'RED'
+)
+```
+
+
+**608. Tree Node**
+
+![image](https://user-images.githubusercontent.com/51500878/134243785-0b5fbe8c-fff7-43a6-aacb-7395fc5eb4ce.png)
+
+![image](https://user-images.githubusercontent.com/51500878/134243822-84e5b672-51ba-41cb-8a1d-f22e9dd6e5a5.png)
+
+![image](https://user-images.githubusercontent.com/51500878/134243869-42799a9f-72de-488d-a3aa-8f6b5472c20c.png)
+
+**Solution**
+
+```sql
 
 ```
