@@ -22,6 +22,7 @@ group by t.request_at;
 
 **Note**
 
+- This problem only output a number in the end.
 - `if(condition, do-when-true, do-when-false)` one line if statement in sql
 - `null` means no value. `is null` and `is not null` are usually used as a `where` condition. 
 
@@ -89,5 +90,19 @@ Similar to the previous question, same `Activity` table.
 **Solution**
 
 ```sql
-
+select round(count(t2.player_id)/count(t1.player_id), 2) as fraction
+from (select player_id, min(event_date) as first_login from activity group by player_id) t1 
+left join activity t2
+on t1.player_id = t2.player_id and t1.first_login - t2.event_date = -1
 ```
+
+**Note**
+
+- This problem is valuable for me. Because I found one problem/inaccurate place of my pervious understanding.
+        Take the `left join` as an example: `a.val1` contains all `val1` in a (suppose there is no `where` clause later), but `b.val1` contains only thsoe have been merged to `a` based on the condition `on a.val2 = b.val2`. **Note**, if one obs in `a` doesn't have been merged with `b`, then `b.val1` is `null`.
+        ```
+        select a.val1, b.val1
+        from (...) a left join (...) b 
+        on a.val2 = b.val2
+        ...
+        ```
