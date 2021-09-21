@@ -349,3 +349,24 @@ where a.x != b.x
 
 ![image](https://user-images.githubusercontent.com/51500878/134250665-c5118a8b-a9bb-4ae7-8a78-bd4c5bdea0d1.png)
 
+**Solution**
+
+```sql
+
+```
+
+**Note**
+
+- The `LEFT()` function extracts a number of characters from a string (starting from left). The `RIGHT()` function extracts a number of characters from a string (starting from right).
+- **Important** `partition by`: A PARTITION BY clause is used to partition rows of table into groups. It is useful when we have to perform a calculation on individual rows of a group using other rows of that group.
+
+> It is always used inside OVER() clause.  
+> The partition formed by partition clause are also known as Window.  
+> This clause works on windows functions only. Like- RANK(), LEAD(), LAG() etc.  
+> If this clause is omitted in OVER() clause, then whole table is considered as a single partition.  
+
+```
+Window_function ( expression ) 
+       Over ( partition by expr [order_clause] [frame_clause] ) 
+```
+
