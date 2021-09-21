@@ -162,3 +162,16 @@ where n.frequency >= abs((select sum(frequency) from numbers where number <= n.n
 > the equation above is (n+l) - (n+r) = l - r, x is median if l==r, of course.
 > 
 > When l != r, as long as n can cover the difference, x is the median.
+
+
+**580. Count Student Number in Departments**
+
+![image](https://user-images.githubusercontent.com/51500878/134201176-01887b1b-e5a9-4b2d-81f6-c4f55bed0c40.png)
+
+![image](https://user-images.githubusercontent.com/51500878/134201229-2c62a843-725c-4cf9-bfb1-a6ab4e8ebaf9.png)
+
+**Solution**
+
+```sql
+
+```
