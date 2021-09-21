@@ -79,6 +79,7 @@ group by a.player_id, a.event_date
 **Note**
 
 - When some problem is required to compute the cumulative sum/product, this pattern should be universal, that is, we left(inner) join the same table with the date before that one in the first table within the same subject(ID), and then take the sum.
+- Note you need to add a `group by` clause after joining, otherwise the final output would only have one obs
 
 
 **550. Game Play Analysis IV (Medium)**
@@ -100,9 +101,64 @@ on t1.player_id = t2.player_id and t1.first_login - t2.event_date = -1
 
 - This problem is valuable for me. Because I found one problem/inaccurate place of my pervious understanding.
         Take the `left join` as an example: `a.val1` contains all `val1` in a (suppose there is no `where` clause later), but `b.val1` contains only thsoe have been merged to `a` based on the condition `on a.val2 = b.val2`. **Note**, if one obs in `a` doesn't have been merged with `b`, then `b.val1` is `null`.
-        ```
+        
+        ```sql
         select a.val1, b.val1
         from (...) a left join (...) b 
         on a.val2 = b.val2
         ...
         ```
+
+**570. Managers with at Least 5 Direct Reports (Medium)**
+
+![image](https://user-images.githubusercontent.com/51500878/134190966-fa540a8d-b85e-47fa-83d7-93fc3f466fa8.png)
+
+**Solution**
+
+```sql
+# my program
+select b.name
+from (select managerid from employee group by managerid having count(managerid) >=5) a
+left join employee b
+on a.managerid = b.id
+
+# Failed when there is no required manager. The output of my program is [null] but the expected value is []
+# because I used b.name here, and b is the second table in the `left join`, so this would generate null value
+```
+
+```sql
+select name from employee 
+where id in 
+(select managerId from Employee
+group by managerId
+having count(managerId)>=5) 
+```
+
+**Note**
+
+- `having`: The HAVING clause was added to SQL because the WHERE keyword cannot be used with aggregate functions. **IMPORTANT**
+
+
+**571. Find Median Given Frequency of Numbers (hard)**
+
+![image](https://user-images.githubusercontent.com/51500878/134193252-d481a5c4-27bc-42ea-9ee2-becb3de34909.png)
+
+**Solution**
+
+```sql
+select avg(n.number) as median
+from numbers n
+where n.frequency >= abs((select sum(frequency) from numbers where number <= n.number) - 
+                        (select sum(frequency) from numbers where number >= n.number))
+```
+
+**Note**
+
+- Here is an explanation: 
+> try to explain this in a hopefully clearer way.
+>
+> suppose number x has frequency of n, and total frequency of other numbers that are on its left is l, on its right is r.
+> 
+> the equation above is (n+l) - (n+r) = l - r, x is median if l==r, of course.
+> 
+> When l != r, as long as n can cover the difference, x is the median.
