@@ -195,7 +195,8 @@ order by student_number desc, a.dept_name
 
 - Great! This is the first problem I solved by myself today! Cheers! (Although it's quite tedious...)
 - The improved version shows that we could use derived variable in `order` clause (**important**)
-
+- Also, note the variable used in `group by` clause don't require `distinct` anymore when selecting.
+ 
 
 **586. Customer Placing the Largest Number of Orders**
 
