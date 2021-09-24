@@ -353,7 +353,16 @@ where a.x != b.x
 **Solution**
 
 ```sql
-
+select distinct pay_month, department_id, (CASE WHEN department_avg_salary > company_avg_salary THEN 'higher'
+     WHEN department_avg_salary < company_avg_salary THEN 'lower'
+     WHEN department_avg_salary = company_avg_salary THEN 'same' END) AS comparison
+     from (select a.employee_id, amount, pay_date, department_id, left(pay_date, 7) as pay_month, 
+           avg(amount) over(partition by a.pay_date) as company_avg_salary,
+           avg(amount) over(partition by a.pay_date, b.department_id) as department_avg_salary
+           from salary a
+           left join employee b 
+           # using join here is faster
+           on a.employee_id = b.employee_id) temp;
 ```
 
 **Note**
