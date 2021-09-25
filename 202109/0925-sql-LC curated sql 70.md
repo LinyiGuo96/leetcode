@@ -70,3 +70,50 @@ where (p.project_id, e.experience_years) in (
 
 ![image](https://user-images.githubusercontent.com/51500878/134786668-4c8da346-b91a-4019-938e-c6571690c1c0.png)
 
+**Solution**
+
+```sql
+select s.seller_id
+from sales s
+group by s.seller_id
+having sum(s.price) >= all(
+    select sum(price)
+    from sales 
+    group by seller_id
+)
+```
+
+**Note**
+
+- ` sum() >= all(...)` here will compare the first sum with _all_ values in `(...)` !
+
+
+**1083. Sales Analysis II**
+
+![image](https://user-images.githubusercontent.com/51500878/134787068-1b182c3e-1f41-4755-b993-b1b70e6f0a2d.png)
+
+![image](https://user-images.githubusercontent.com/51500878/134787073-827f0ce3-e049-4cd5-b0fd-81697de6ceab.png)
+
+**Solution**
+
+```sql
+select a.buyer_id 
+from sales a 
+# for some reason, inner join is slower here
+left join product b 
+on a.product_id = b.product_id
+group by a.buyer_id
+having sum(b.product_name = 'S8') > 0 and sum(b.product_name = 'iPhone') = 0
+```
+
+**1084. Sales Analysis III**
+
+![image](https://user-images.githubusercontent.com/51500878/134787567-b1610d0a-c1b7-44b0-91ff-6f9c306a9ce5.png)
+
+![image](https://user-images.githubusercontent.com/51500878/134787569-47619e03-c50c-4333-ac25-44cc187cd0b1.png)
+
+**Solution**
+
+```sql
+```
+
