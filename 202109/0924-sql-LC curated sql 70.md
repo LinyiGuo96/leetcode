@@ -22,6 +22,27 @@ having count(distinct product_key) = (select count(*) from product)
 **Solution**
 
 ```sql
-
-
+select actor_id, director_id
+from actordirector
+group by actor_id, director_id
+having count(timestamp) >= 3
 ```
+
+**1068. Product Sales Analysis I**
+
+![image](https://user-images.githubusercontent.com/51500878/134755027-7ab17cde-83d3-4733-a3ec-da5effa6044c.png)
+
+![image](https://user-images.githubusercontent.com/51500878/134755041-7d492e51-779c-4df1-8675-5f1aa348f187.png)
+
+![image](https://user-images.githubusercontent.com/51500878/134755045-87a88235-2118-4ad0-987e-b8dab3e65599.png)
+
+**Solution**
+
+```sql
+select p.product_name, s.year, s.price
+from sales s
+left join product p
+on s.product_id = p.product_id;
+```
+
+
