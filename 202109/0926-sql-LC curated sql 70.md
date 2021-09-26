@@ -32,6 +32,31 @@ group by a.firstlogin
 **Solution**
 
 ```sql
+# This is not my method
+
+select b.book_id, b.name from
+(select * from books where available_from < '2019-05-23') b
+left join
+(select * from Orders where dispatch_date > '2018-06-23') o
+on b.book_id = o.book_id
+group by b.book_id, b.name
+having sum(o.quantity) is null or sum(o.quantity) <10;
+```
+
+**Note**
+
+- This problem is not very good because the problem description is not very cleat regarding with the `dispatch_date`. So I will skip this one for now.
+
+
+**1112. Highest Grade For Each Student**
+
+![image](https://user-images.githubusercontent.com/51500878/134825123-a11a1fdf-54e1-4dca-9d6e-c3e27627d879.png)
+
+![image](https://user-images.githubusercontent.com/51500878/134825130-3fda3628-d030-4573-b3a7-135b5a73902c.png)
+
+**Solution**
+
+```sql
 ```
 
 **Note**
