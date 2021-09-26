@@ -115,5 +115,14 @@ having sum(b.product_name = 'S8') > 0 and sum(b.product_name = 'iPhone') = 0
 **Solution**
 
 ```sql
+select distinct s.product_id, p.product_name
+from sales s
+inner join product p
+on s.product_id = p.product_id
+where (s.sale_date between '2019-01-01' and '2019-03-31') and 
+        s.product_id not in (select product_id from sales where sale_date not between '2019-01-01' and '2019-03-31')
 ```
 
+**Note**
+
+- When comparing date time in sql, I used `between ... and ...` here. Sometimes we could also use `>, <, =, >=, <=`. Check this [link](https://www.w3schools.com/sql/sql_datatypes.asp) for the introduction of data types in sql.
