@@ -44,7 +44,7 @@ having sum(o.quantity) is null or sum(o.quantity) <10;
 ```
 
 **Note**
-
+- `if(condition, do-if-true, do-if-false)`
 - This problem is not very good because the problem description is not very cleat regarding with the `dispatch_date`. So I will skip this one for now.
 
 
