@@ -32,13 +32,23 @@ order by student_id
 **Solution**
 
 ```sql
-
+# my method
+select extra as report_reason, count(distinct post_id) as report_count
+from actions
+where action_date = '2019-07-04' and action = 'report' and extra is not null
+group by extra
+```
+```sql
+select extra as report_reason, count(distinct post_id) as report_count
+from actions
+where action_date = '2019-07-04' and action = 'report'
+group by extra
 ```
 
 **Note**
 
 - I am going to sleep :( I just checked the team lead and my manager's status, they are all leave now. Lol, they told me to stand by this evening and after I submitted my programs, they even didn't notice me(or us) whether we could leave or not? Ridiculous. Bye-Bye, I am gonna leave, absolutely.
-
+- We don't need to add `extra is not null`, because when using `action = 'report'`, we already assume extra is not null
 
 
 
