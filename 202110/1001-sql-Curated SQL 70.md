@@ -208,3 +208,65 @@ limit 1
 ```
 
 
+**1205. Monthly Transactions II**
+
+![image](https://user-images.githubusercontent.com/51500878/135699714-0092d40c-ac4f-45ec-ad88-83036b6eaf0b.png)
+
+![image](https://user-images.githubusercontent.com/51500878/135699737-02aa1c02-0621-465e-8e5d-3c99118877a5.png)
+
+**Solution**
+
+```sql
+SELECT month, country, 
+        SUM(CASE WHEN state = "approved" THEN 1 ELSE 0 END) AS approved_count, 
+        SUM(CASE WHEN state = "approved" THEN amount ELSE 0 END) AS approved_amount, 
+        SUM(CASE WHEN state = "back" THEN 1 ELSE 0 END) AS chargeback_count, 
+        SUM(CASE WHEN state = "back" THEN amount ELSE 0 END) AS chargeback_amount
+FROM
+(
+    SELECT LEFT(chargebacks.trans_date, 7) AS month, country, "back" AS state, amount
+    FROM chargebacks
+    JOIN transactions ON chargebacks.trans_id = transactions.id
+    UNION ALL
+    SELECT LEFT(trans_date, 7) AS month, country, state, amount
+    FROM transactions
+    WHERE state = "approved"
+) s
+GROUP BY month, country
+```
+
+**Note**
+
+- The idea of this problem is: we computed the `approved` and `chargeback` tables seperately and then take `union all` of both tables. In the end, we could use `case when` to extract those items we want and then combine them together to generate the final table.
+
+
+**1212. Team Scores in Football Tournament**
+
+![image](https://user-images.githubusercontent.com/51500878/135700828-48dc6c8b-9dd8-4e19-9360-c200d5fce60e.png)
+
+![image](https://user-images.githubusercontent.com/51500878/135700839-1f272e18-8fc1-456c-aa47-e8ff5f0672d8.png)
+
+![image](https://user-images.githubusercontent.com/51500878/135700842-3f3f98de-c30a-47ed-840e-3baa947588d4.png)
+
+**Solution**
+
+```sql
+# my method
+select t.team_id, t.team_name, ifnull(sum(a.score), 0) as num_points
+from (select host_team as team, case when host_goals > guest_goals then 3
+                                when host_goals < guest_goals then 0
+                                else 1 end as score
+from matches         
+union all 
+select guest_team as team, case when host_goals > guest_goals then 0
+                                when host_goals < guest_goals then 3
+                                else 1 end as score
+from matches) a right join teams t
+on a.team = t.team_id
+group by t.team_id
+order by num_points desc, t.team_id
+```
+
+**Note**
+
+- Good! Ialmost solved this by using union all. There is one problem I didn't notice in the last row `order by num_points desc, t.team_id`, which is `order by sum(a.score) desc, t.team_id` previously. But this is wrong, because there are `null` values that cannot be compared. Thus I have to take it into consideration.
