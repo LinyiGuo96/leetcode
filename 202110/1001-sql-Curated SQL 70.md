@@ -270,3 +270,12 @@ order by num_points desc, t.team_id
 **Note**
 
 - Good! Ialmost solved this by using union all. There is one problem I didn't notice in the last row `order by num_points desc, t.team_id`, which is `order by sum(a.score) desc, t.team_id` previously. But this is wrong, because there are `null` values that cannot be compared. Thus I have to take it into consideration.
+
+
+
+**Note** _(These notes are from IBM Course Databases and SQL for Data Science with Python)_
+
+- `order by var desc nulls last` will put the `nulls` value in the end. Otherwise the nulls value would be at the beginning, if any. Note the order need to be `desc`!
+- `REPLACE(string, old_string, new_string)`. Eg, `replace(percent-var, '%', '')`.
+- `cast()`: The CAST() function converts a value (of any type) into a specified datatype. Eg. `SELECT CAST('2017-08-25' AS datetime);`
+- 
