@@ -12,6 +12,10 @@ Q: It depends on the threshold we take to classify the prediction. This [link](h
 
 Q: Not good. Because the rate of fraud is very low, so even for a very simple model, it could possibly have an accuracy at 90%.
 
+**4. A case study**
+
+When get some data, perhaps making a strategy is the first thing you need to do, such as what we are going to do with these data. Do NOT work on the data without thinking.
+
 
 **In the end**
 
