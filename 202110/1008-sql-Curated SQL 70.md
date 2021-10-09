@@ -12,6 +12,22 @@
 **Solution**
 
 ```sql
+select p.product_id, round(sum(p.price * u.units)/sum(u.units), 2) as average_price 
+from prices p
+left join unitssold u
+on p.product_id = u.product_id and u.purchase_date between p.start_date and p.end_date
+group by p.product_id
+```
 
+
+**1225. Report Contiguous Dates (hard)**
+
+![image](https://user-images.githubusercontent.com/51500878/136641119-0392f6cb-6c34-4264-8637-9ebd6273b2d6.png)
+
+![image](https://user-images.githubusercontent.com/51500878/136641140-6f074213-0159-426a-937e-f1b5a456765f.png)
+
+**Solution**
+
+```sql
 
 ```
