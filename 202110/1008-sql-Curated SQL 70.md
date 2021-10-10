@@ -19,7 +19,7 @@ on p.product_id = u.product_id and u.purchase_date between p.start_date and p.en
 group by p.product_id
 ```
 
-
+ 
 **1225. Report Contiguous Dates (hard)**
 
 ![image](https://user-images.githubusercontent.com/51500878/136641119-0392f6cb-6c34-4264-8637-9ebd6273b2d6.png)
@@ -31,3 +31,5 @@ group by p.product_id
 ```sql
 
 ```
+
+**Note**
