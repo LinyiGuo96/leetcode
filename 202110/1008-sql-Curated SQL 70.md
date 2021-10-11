@@ -28,6 +28,8 @@ group by p.product_id
 
 **Solution**
 
+_Note we used MS SQL here not MySQL._
+
 ```sql
 -- MSSQL
 
