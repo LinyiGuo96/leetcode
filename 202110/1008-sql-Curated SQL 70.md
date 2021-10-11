@@ -50,3 +50,13 @@ WITH temporaryTable (averageValue) as
     FROM Table, temporaryTable
     WHERE Table.Attr1 > temporaryTable.averageValue;
 ```    
+
+- `DATEADD(interval, number, date)`: The `DATEADD()` function adds a time/date interval to a date and then returns the date.
+
+- `window functions` are functions that operate on a set of rows and return a single value for each row from the underlying query. A window function uses values from the rows in a window to calculate the returned values. When you use a window function in a query, define the window using the `OVER()` clause. The `OVER()` clause has athe following capabilities:
+   - Defines window partitions to form groups of rows (`PARTITION BY` clause).
+   - Orders rows within a partition (`ORDER BY` clause).
+   
+> select emp_name, dealer_id, sales, avg(sales) over() as avgsales from q1_sales;
+
+
