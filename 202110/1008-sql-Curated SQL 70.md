@@ -29,7 +29,29 @@ group by p.product_id
 **Solution**
 
 ```sql
+-- MSSQL
 
+with a  as (
+(select fail_date as date,
+       'failed' as period_state
+       from failed)
+union all 
+ (select success_date as date,
+         'succeeded' as period_state
+         from succeeded)
+    ),
+    
+  b as (    
+select date,
+       period_state,
+       row_number() over (order by period_state, date asc) as seq
+   from a where date between '2019-01-01' and '2019-12-31'
+         )
+
+select period_state, min(date) as start_date, max(date) as end_date from b
+-- THINK ABOUT WHY WE USED dateadd(d, -seq, date)
+group by dateadd(d, -seq, date),period_state
+order by start_date asc
 ```
 
 **Note**
@@ -59,4 +81,5 @@ WITH temporaryTable (averageValue) as
    
 > select emp_name, dealer_id, sales, avg(sales) over() as avgsales from q1_sales;
 
+- The key idea of this problem lies in the final `group clause`: `group by dateadd(day, -seq, date), period_state`. Because if several rows have continuous date and continuous row number, then their date minus the sequence number should be the same (if we didn't care about their states, these obs should belong to the same group). Then we group by their state (fail or succeed) again to avoid.
 
