@@ -93,13 +93,23 @@ from scores
 
 **Solution**
 
+
 ```sql
-
-
+# A great solution using window function
+select distinct visited_on, amount, round(amount/7, 2) as average_amount
+from (select visited_on, 
+      sum(amount) over (order by visited_on range between interval 6 day preceding and current row) as amount,
+      dense_rank() over (order by visited_on) as rk
+      from Customer) as t
+where rk >= 7
 ```
 
+**Note**
 
+- `order by visited_on range between interval 6 day preceding and current row`: check this [link](https://dev.mysql.com/doc/refman/8.0/en/window-functions-frames.html). The purpose is to select the amount of today and preceding 6 days.
+- `dense_rank()` and `rank()`: RANK and DENSE_RANK will assign the grades the same rank depending on how they fall compared to the other values. However, **RANK** will then **skip** the next available ranking value whereas **DENSE_RANK** would still use the next **chronological**(continuous) ranking value.
 
+![image](https://user-images.githubusercontent.com/51500878/138003372-3f436484-f54e-4519-ad5a-390418ec3b37.png)
 
 
 
