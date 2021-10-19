@@ -66,15 +66,37 @@ from employee
 **Solution**
 
 ```sql
-
+select a.gender, a.day, sum(b.score_points) as total
+from scores a, scores b
+where a.day >= b.day and a.gender = b.gender
+group by a.gender, a.day
+order by a.gender, a.day
 ```
 
+```sql
+# faster version with window function
+select gender, day, sum(score_points) over (partition by gender order by day) as total
+from scores
+```
+
+**Note**
+
+- After both questions above, I found the `window function` is really a useful and powerful tool. I absolutely need to get more used to it.
+- One thing need to mentioned here is, after using `sum(score_points) over (partition by gender order by day)` the final output is order according to the `gender` and `day`. I don't need to call `order by` clause anymore.
 
 
+**1321. Restaurant Growth （medium）**
+
+![image](https://user-images.githubusercontent.com/51500878/137959972-04c956fb-ead8-48c1-8210-436e846be233.png)
+
+![image](https://user-images.githubusercontent.com/51500878/137960003-3ac22b66-45f5-4f1e-b3db-fe57aec536c7.png)
+
+**Solution**
+
+```sql
 
 
-
-
+```
 
 
 
