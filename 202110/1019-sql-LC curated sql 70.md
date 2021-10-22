@@ -104,12 +104,23 @@ from (select visited_on,
 where rk >= 7
 ```
 
+```sql
+# A faster method without using window function
+select a.visited_on as visited_on, sum(b.total) as amount, round(avg(b.total), 2) as average_amount
+from (select visited_on, sum(amount) as total from customer group by visited_on) a,
+     (select visited_on, sum(amount) as total from customer group by visited_on) b
+where datediff(a.visited_on, b.visited_on) between 0 and 6
+group by a.visited_on
+having count(b.visited_on) = 7
+```
+
 **Note**
 
 - `order by visited_on range between interval 6 day preceding and current row`: check this [link](https://dev.mysql.com/doc/refman/8.0/en/window-functions-frames.html). The purpose is to select the amount of today and preceding 6 days.
 - `dense_rank()` and `rank()`: RANK and DENSE_RANK will assign the grades the same rank depending on how they fall compared to the other values. However, **RANK** will then **skip** the next available ranking value whereas **DENSE_RANK** would still use the next **chronological**(continuous) ranking value.
 
 ![image](https://user-images.githubusercontent.com/51500878/138003372-3f436484-f54e-4519-ad5a-390418ec3b37.png)
+
 
 
 
