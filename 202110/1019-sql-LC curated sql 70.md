@@ -121,6 +121,15 @@ having count(b.visited_on) = 7
 
 ![image](https://user-images.githubusercontent.com/51500878/138003372-3f436484-f54e-4519-ad5a-390418ec3b37.png)
 
+- As we may realize, if we only have one dataset and need to do something with it, then generally speaking we would call this dataset twice as following: 
+
+```
+select ...
+from dataset a, dataset b
+...
+```
+
+- `datediff(a.visited_on, b.visited_on) between 0 and 6` means `a.visited_on` is after `b.visited_on`
 
 
 
