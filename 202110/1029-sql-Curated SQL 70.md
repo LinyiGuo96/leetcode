@@ -18,6 +18,13 @@
 
 - CTE: common_table_expression. 
 
+```sql
+WITH expression_name[(column_name [,...])]
+AS
+    (CTE_definition)
+SQL_statement;
+```
+
 ```mssql
 -- Define the CTE expression name and column list.  
 WITH Sales_CTE (SalesPersonID, SalesOrderID, SalesYear)  
