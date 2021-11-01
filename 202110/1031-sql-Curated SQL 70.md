@@ -9,8 +9,23 @@
 **Solution**
 
 ```sql
+# my solution
+select a.stock_name, sellprice-buyprice as capital_gain_loss
+from (select stock_name, sum(price) as buyprice from stocks where operation='Buy' group by stock_name) a
+left join (select stock_name, sum(price) as sellprice from stocks where operation='Sell' group by stock_name) b
+on a.stock_name = b.stock_name
+```
 
-
+```sql
+# some genius solution
+SELECT stock_name, SUM(
+    CASE
+        WHEN operation = 'Buy' THEN -price
+        ELSE price
+    END
+) AS capital_gain_loss
+FROM Stocks
+GROUP BY stock_name
 ```
 
 
