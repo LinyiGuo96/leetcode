@@ -28,8 +28,38 @@ where cnt<2 or n = 2
 **Solution**
 
 ```sql
-
+select a.product_id, b.product_name, a.report_year, a.total_amount
+from (
+    select product_id, '2018' as report_year, 
+    average_daily_sales * (datediff(least(period_end, '2018-12-31'), greatest(period_start, '2018-01-01')) + 1) as total_amount
+    from sales
+    where year(period_start) = 2018
+    
+    union all
+    
+    select product_id, '2019' as report_year, 
+    average_daily_sales * (datediff(least(period_end, '2019-12-31'), greatest(period_start, '2019-01-01')) + 1) as total_amount
+    from sales
+    where year(period_start) < 2020 and year(period_end)>2018
+    
+    union all
+    
+    select product_id, '2020' as report_year, 
+    average_daily_sales * (datediff(least(period_end, '2020-12-31'), greatest(period_start, '2020-01-01')) + 1) as total_amount
+    from sales
+    where year(period_end) = 2020
+) a left join product b
+on a.product_id = b.product_id
+order by a.product_id, a.report_year
 ```
+
+**Note**
+
+- `LEAST()`: returns the smallest value of the list of arguments. `GREATEST()`: returns the greatest value of the list of arguments.
+- Here is a comparison between `min()` and `least()`, [link](https://database.guide/min-vs-least-in-mysql-whats-the-difference/).
+- `datediff(interval, date_end, date_start)` returns `date_end - date_start`.
+- The idea of this solution is very simple. The difficulty mainly lies in the 
+
 
 
 
