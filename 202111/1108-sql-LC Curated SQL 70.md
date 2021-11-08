@@ -1,4 +1,4 @@
-**1412. Find the Quiet Students in All Exams**
+**1412. Find the Quiet Students in All Exams (hard)**
 
 ![image](https://user-images.githubusercontent.com/51500878/140747913-b566ea8b-22fe-44dd-9009-f20255a9d4b6.png)
 
