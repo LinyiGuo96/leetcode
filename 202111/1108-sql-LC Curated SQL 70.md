@@ -47,7 +47,25 @@ order by student_id
 - The second method avoids using _left join_ here.
 
 
+**1421. NPV Queries**
+
+![image](https://user-images.githubusercontent.com/51500878/140842966-9bebf562-e6bb-4d2e-a1ec-8a3efc501e74.png)
+
+![image](https://user-images.githubusercontent.com/51500878/140842974-d691c802-0ff3-497f-ac22-e9825e49542e.png)
+
+![image](https://user-images.githubusercontent.com/51500878/140842992-1451ee81-3dc3-483c-82d6-8cf3c0b1d91c.png)
+
+![image](https://user-images.githubusercontent.com/51500878/140843005-7422697b-61a1-4818-b49e-a2825031e529.png)
+
+![image](https://user-images.githubusercontent.com/51500878/140843015-0c404945-f699-4351-9902-ad18fa604826.png)
 
 
 
+**Solution**
+
+```sql
+select q.*, ifnull(n.npv,0) as npv
+from queries q left join npv n
+on q.id = n.id and q.year=n.year
+```
 
