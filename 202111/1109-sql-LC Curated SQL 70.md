@@ -33,11 +33,25 @@ on e.right_operand = v2.name
 **Solution**
 
 ```sql
-
+# My method
+select sale_date, sum(case when fruit = 'apples' then sold_num
+                        else -sold_num end) as diff 
+from sales
+group by sale_date
+order by sale_date
 ```
 
+```sql
+# Method 2
+select sale_date, sum(if(fruit = 'apples', sold_num, -sold_num) as diff 
+from sales
+group by sale_date
+order by sale_date
+```
 
+**Note**
 
+- If there is only two cases used in `case when`, we could use `if(condition, do, else-do)` to replace them to make code clean _(but seems to be slower)_.
 
 
 
