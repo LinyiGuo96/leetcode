@@ -23,6 +23,9 @@ on a.company_id = b.company_id
 ```
 
 
+**1484. Group Sold Products By The Date**
+
+![image](https://user-images.githubusercontent.com/51500878/141236021-877c5a68-31e4-472d-9940-c747ffd5116d.png)
 
 
 
