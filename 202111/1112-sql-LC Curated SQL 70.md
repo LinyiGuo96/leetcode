@@ -12,7 +12,11 @@
 **Solution**
 
 ```sql
-
+select distinct b.title
+from (select * from tvprogram where year(program_date)=2020 and month(program_date)=6) a
+left join (select * from content where kids_content='Y' and content_type = 'Movies') b
+on a.content_id = b.content_id
+where b.title is not null
 ```
 
 
