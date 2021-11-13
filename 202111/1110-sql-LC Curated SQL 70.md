@@ -27,13 +27,27 @@ on a.company_id = b.company_id
 
 ![image](https://user-images.githubusercontent.com/51500878/141236021-877c5a68-31e4-472d-9940-c747ffd5116d.png)
 
+![image](https://user-images.githubusercontent.com/51500878/141596888-894334ae-716b-4295-98e1-eeb70b6e5f0c.png)
 
+**Solution**
 
+```sql
+select sell_date, count(distinct product) as num_sold, group_concat(distinct product order by product) as products
+from activities
+group by sell_date
+```
 
+**Note**
 
-
-
-
+- `group_concat()`: an aggregate function that concatenates strings from a `group` into a single string with various options.
+```sql
+GROUP_CONCAT(
+    DISTINCT expression
+    ORDER BY expression
+    SEPARATOR sep
+);
+```
+The default value of `sep` is `,`. Notice it belongs to the `aggregate` function family, which is another big group of functions compared with `window` functions. The aggregate function is often used with `group by` statement, including `avg(), min(), max()`. Please refer to [aggregate](https://dev.mysql.com/doc/refman/8.0/en/aggregate-functions.html) and [window](https://dev.mysql.com/doc/refman/8.0/en/window-function-descriptions.html) funtions.
 
 
 
