@@ -49,11 +49,21 @@ having avg(duration) > (select avg(duration) from calls)
 ```
 
 
+**1511. Customer Order Frequency**
+
+![image](https://user-images.githubusercontent.com/51500878/141600885-250fe2b7-9ca6-42d6-9850-bae29771fc59.png)
+
+![image](https://user-images.githubusercontent.com/51500878/141600906-bf8be0d4-b680-43bd-9454-99e7d29eaf1b.png)
+
+![image](https://user-images.githubusercontent.com/51500878/141600912-54f57646-2b22-44e4-8e36-859f9a778d68.png)
+
+![image](https://user-images.githubusercontent.com/51500878/141600918-45ed7488-e596-4f77-bf0e-6bb58c2349b0.png)
 
 
+**Solution**
 
+```sql
 
-
-
+```
 
 
