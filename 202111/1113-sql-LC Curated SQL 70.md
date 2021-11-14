@@ -7,8 +7,25 @@
 **Solution**
 
 ```sql
-
+SELECT *
+FROM Users
+WHERE mail REGEXP '^[A-Za-z][A-Za-z0-9\_\.\-]*@leetcode\.com$'
 ```
+
+**Note**
+
+- Regular expression: a powerful way of specifying a pattern for a complex search.
+![image](https://user-images.githubusercontent.com/51500878/141697606-bfe6aba9-7316-4d3e-95c5-cf63b0c19f09.png)
+
+Eg,
+
+```sql
+SELECT * FROM author 
+WHERE aut_name REGEXP '^w'; 
+```
+
+- Look at the `'^[A-Za-z][A-Za-z0-9\_\.\-]*@leetcode\.com$'`: `**^**[A-Za-z]` means the string must begin with letters, `@leetcode\.com**$**` means the string must end with `@leetcode.com`
+
 
 
 **1532. The Most Recent Three Orders (medium)**
