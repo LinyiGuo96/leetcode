@@ -63,7 +63,34 @@ having avg(duration) > (select avg(duration) from calls)
 **Solution**
 
 ```sql
-
+# my first method, too stupid
+select c.customer_id, c.name
+from customers c
+where c.customer_id in 
+    (select comb.customer_id
+        from (select o.customer_id, o.month
+            from (select *, month(order_date) as month from orders where year(order_date) = 2020 and month(order_date) in (6,7)) o
+            left join product p
+            on o.product_id = p.product_id
+            group by o.customer_id, o.month
+            having sum(o.quantity * p.price) >= 100 ) comb
+     group by comb.customer_id 
+     having count(*) = 2)
 ```
+
+```sql
+# A much straight and smart method
+select customer_id, name
+from customers 
+join orders using(customer_id) 
+join product using(product_id)
+group by customer_id
+having sum(if(left(order_date, 7) = '2020-06', quantity, 0) * price) >= 100 and 
+        sum(if(left(order_date, 7) = '2020-07', quantity, 0) * price) >= 100
+```
+
+**Note**
+
+- `using` clause: works like ` ... join ... on ... `, but by default, the column(s) after `using` should exist in both tables and have the same name. Therefore, we don't need to write something like `a.col1 = b.col1` anymore.
 
 
