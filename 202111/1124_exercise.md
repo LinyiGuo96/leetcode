@@ -66,6 +66,17 @@ on a.company = b.company
 order by b.rank2010, a.year desc
 ```
 
+```sql
+select a.*
+from table1 a
+left join (select t.company, row_number() over (order by t.sales desc) as rank2010
+          from table1 t
+          where year = 2010) b
+on a.company = b.company
+order by b.rank2010, a.year desc
+```
+
+
 **6**
 
 ![image](https://user-images.githubusercontent.com/51500878/143321465-b0028f45-558b-4f69-baee-27ad4c439e51.png)
