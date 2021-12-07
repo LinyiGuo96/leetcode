@@ -72,7 +72,7 @@ data_frame[data_frame['risk_score'] >= UL]
       - time series
       - ....
    
-Refer to this [Link](https://towardsdatascience.com/all-about-missing-data-handling-b94b8b5d2184) for more details.
+Refer to this [Link](https://towardsdatascience.com/all-about-missing-data-handling-b94b8b5d2184) for more details regarding outliers.
 
 # Question 5
 
