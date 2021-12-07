@@ -78,9 +78,21 @@ Refer to this [Link](https://towardsdatascience.com/all-about-missing-data-handl
 
 Several bullet points in my opinion:
 
+Tech: 
+
 1. Logistic regression (remember the result from the sigmoid function is the probability/likelihood)
-2. feature selection 
+2. Feature selection (refer to this [link](https://www.analyticsvidhya.com/blog/2020/10/feature-selection-techniques-in-machine-learning/))
 3. Cross Validation
+4. Gradient descent
+
+General (beacause you are a leader):
+
+1. Divide the projects and assign to team members based on their characteristic (some for data, some for model, some for final check)
+2. Keep good communiactions with upsteam/downstream, as well as team members.
+
+
+# Question 6
+
 
 
 
